@@ -1,4 +1,4 @@
-#include "CMatrix.h"
+#include "includes/CMatrix.h"
 
 CMatrix::CMatrix(int height, int width, std::vector<double> coefs):
     _height(height),
@@ -18,13 +18,13 @@ std::vector<int> CMatrix::dimensions() const
     return std::vector<int> ({_height, _width});
 }
 
-double CMatrix::get_coef(const int i, const int j) const
+double CMatrix::get_coef(const int i, const int j) const//be careful, i and j start from 0!
 {
     int p = position(i,j);
     return _coefs[p];
 }
 
-void CMatrix::set_coef(const int i, const int j, const double coef)
+void CMatrix::set_coef(const int i, const int j, const double coef)//be careful, i and j start from 0!
 {
     int p = position(i,j);
     _coefs[p] = coef;

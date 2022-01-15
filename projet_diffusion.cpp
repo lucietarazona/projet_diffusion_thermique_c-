@@ -1,10 +1,18 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "includes/CMatrix.h"
+#include "includes/tests.h"
 
-int main ()
+int main (int argc, char** argv)
 {
+    if (argc > 1) //enter anything to launch test
+    {
+        tests();
+    }
+    else
+    {
    double tf {1};
    double xf {1};
    int Nx {100};
@@ -33,4 +41,5 @@ int main ()
    K.display();
    
     
+    }
 }
