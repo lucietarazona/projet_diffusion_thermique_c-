@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <fstream>
 
 #include "includes/CMatrix.h"
 #include "includes/tests.h"
@@ -45,20 +46,22 @@ int main (int argc, char** argv)
 
     //temperature initialization and values in temp
     CMatrix T(Nx,1,std::vector<double>(Nx*1,0));
-    for (int i=0; i<Nx; i++)
+    for (int i=0; i<Nx-1; i++)
     {
         T.set_coef_1D(i, 0.5+sin(2*M_PI*i*delta_x)-0.5*cos(2*M_PI*i*delta_x));
         temp.set_coef_2D(0,i, T.get_coef_1D(i));
     }
-    T.display();
+    T.set_coef_1D(Nx-1,0);
+    temp.set_coef_2D(0, Nx-1, 0);
+    //T.display(); up to you
 
    for (int i=1;i<Nt;i++)
    {
        CMatrix T1=euler_exp_1D_step(delta_t, K, T);
        T1.set_coef_1D(0,0);     //conditions on x=0 and x=L
        T1.set_coef_1D(Nx-1,0);
-       T1.display();
-       std::cout<<"\n"<<std::endl;
+       //T1.display(); up to you
+       //std::cout<<"\n"<<std::endl;
 
        for (int j=0;j<Nx;j++)
        {
@@ -66,9 +69,20 @@ int main (int argc, char** argv)
        }
 
    }
-    temp.display();
+    //temp.display(); up to you
 
-   
+    //exporting to txt
+    std::ofstream values_file ("values_temp.txt");
+    for (int i=0;i<Nt;i++)
+    {
+        for (int j=0;j<Nx;j++)
+        {
+            values_file<<temp.get_coef_2D(i,j)<<";";
+        }
+        values_file<<"\n";
+    }
+    values_file.close();
+
     
     }
 }
