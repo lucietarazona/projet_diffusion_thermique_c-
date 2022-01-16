@@ -25,6 +25,11 @@ void tests()
     std::cout<<"set 2D test"<<std::endl;
     T.set_coef_2D(1,2,25);
     T.display();
+
+    //transpose test
+    std::cout<<"transpose test"<<std::endl;
+    CMatrix mat_res=T.transpose();
+    mat_res.display();
     
     //addition test
     std::cout<<"addition test"<<std::endl;

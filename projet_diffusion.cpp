@@ -72,16 +72,16 @@ int main (int argc, char** argv)
     //temp.display(); up to you
 
     //exporting to txt
-    std::ofstream values_file ("values_temp.txt");
+    std::ofstream values_exp_file ("values_temp.txt");
     for (int i=0;i<Nt;i++)
     {
         for (int j=0;j<Nx;j++)
         {
-            values_file<<temp.get_coef_2D(i,j)<<";";
+            values_exp_file<<temp.get_coef_2D(i,j)<<";";
         }
-        values_file<<"\n";
+        values_exp_file<<"\n";
     }
-    values_file.close();
+    values_exp_file.close();
 
     
     }

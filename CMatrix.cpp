@@ -39,6 +39,21 @@ void CMatrix::set_coef_2D(const int i, const int j, const double coef)//be caref
     _coefs[p] = coef;
 }
 
+CMatrix CMatrix::transpose()
+{
+    CMatrix mat_res(_width,_height,std::vector<double>(_width*_height,0));
+    for (int i=0;i<_width;i++)
+    {
+        for (int j=0;j<_height;j++)
+        {
+            int p1=position(i,j);
+            int p2=position(j,i);
+            mat_res._coefs[p1]=_coefs[p2];
+        }
+    }
+    return mat_res;
+}
+
 
 //maths
 CMatrix CMatrix::sum(const CMatrix& mat) const
@@ -99,4 +114,15 @@ void CMatrix::display() const
             std::cout<<std::endl;
         }
     }
-
+double CMatrix::max_coef()const
+{
+    double max=_coefs[0];
+    for (int i=0;i<_height*_width;i++)
+    {
+        if (_coefs[i]>max)
+        {
+            max=_coefs[i];
+        }
+    }
+    return max;
+}
