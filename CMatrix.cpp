@@ -18,13 +18,22 @@ std::vector<int> CMatrix::dimensions() const
     return std::vector<int> ({_height, _width});
 }
 
-double CMatrix::get_coef(const int i, const int j) const//be careful, i and j start from 0!
+double CMatrix::get_coef_1D(const int i) const
+{
+    return _coefs[i];
+}
+double CMatrix::get_coef_2D(const int i, const int j) const//be careful, i and j start from 0!
 {
     int p = position(i,j);
     return _coefs[p];
 }
 
-void CMatrix::set_coef(const int i, const int j, const double coef)//be careful, i and j start from 0!
+void CMatrix::set_coef_1D(const int i, const double coef)
+{
+    _coefs[i] = coef;
+}
+
+void CMatrix::set_coef_2D(const int i, const int j, const double coef)//be careful, i and j start from 0!
 {
     int p = position(i,j);
     _coefs[p] = coef;

@@ -9,8 +9,10 @@ public:
     ~CMatrix();
     int position(const int i, const int j) const ;
     std::vector<int> dimensions() const ;
-    double get_coef(const int i, const int j) const;
-    void set_coef(const int i, const int j, const double coef);
+    double get_coef_1D(const int i) const;
+    double get_coef_2D(const int i, const int j) const;
+    void set_coef_1D(const int i, const double coef);
+    void set_coef_2D(const int i, const int j, const double coef);
     CMatrix sum(const CMatrix& mat) const;
     CMatrix sub(const CMatrix& mat) const;
     CMatrix homo(const double lambda) const;

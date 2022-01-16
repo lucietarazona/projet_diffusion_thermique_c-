@@ -2,7 +2,7 @@
 #include "includes/euler_exp.h"
 
 
-CMatrix euler_exp_1D_step(const double delta_t, const int N, const CMatrix&K, const CMatrix& T)
+CMatrix euler_exp_1D_step(const double delta_t, const CMatrix& K, const CMatrix& T)
 {
     CMatrix modif1 = K.mult(T);
     CMatrix modif2 = modif1.homo(delta_t);

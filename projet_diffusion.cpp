@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 
 #include "includes/CMatrix.h"
 #include "includes/tests.h"
+#include "includes/euler_exp.h"
 
 int main (int argc, char** argv)
 {
@@ -15,8 +17,8 @@ int main (int argc, char** argv)
     {
    double tf {1};
    double xf {1};
-   int Nx {100};
-   int Nt {100};
+   int Nx {10};
+   int Nt {10};
    double delta_t = tf/Nt;
    double delta_x = xf/Nx;
    
@@ -27,18 +29,45 @@ int main (int argc, char** argv)
        {
            if (i==j)
            {
-               K.set_coef(i,i,-2);
+               K.set_coef_2D(i,i,-2);
            }
-           else if ((i==j-1)||(j==i-1));
+           else if ((i==j-1)||(j==i-1))
            {
-               int p1 = K.position(i,j-1);
-               int p2 = K.position(i-1,j);
-               K.set_coef(i,j-1,1);
-               K.set_coef(i-1,j,1);
+               K.set_coef_2D(i,j,1);
            }
        }
    }
-   K.display();
+   //K.display(); to check K
+
+
+    //matrix keeping all temperature values
+    CMatrix temp(Nt,Nx,std::vector<double>(Nt*Nx,0));
+
+    //temperature initialization and values in temp
+    CMatrix T(Nx,1,std::vector<double>(Nx*1,0));
+    for (int i=0; i<Nx; i++)
+    {
+        T.set_coef_1D(i, 0.5+sin(2*M_PI*i*delta_x)-0.5*cos(2*M_PI*i*delta_x));
+        temp.set_coef_2D(0,i, T.get_coef_1D(i));
+    }
+    T.display();
+
+   for (int i=1;i<Nt;i++)
+   {
+       CMatrix T1=euler_exp_1D_step(delta_t, K, T);
+       T1.set_coef_1D(0,0);     //conditions on x=0 and x=L
+       T1.set_coef_1D(Nx-1,0);
+       T1.display();
+       std::cout<<"\n"<<std::endl;
+
+       for (int j=0;j<Nx;j++)
+       {
+           temp.set_coef_2D(i,j,T1.get_coef_1D(j));
+       }
+
+   }
+    temp.display();
+
    
     
     }
