@@ -13,7 +13,7 @@ public:
     double get_coef_2D(const int i, const int j) const;
     void set_coef_1D(const int i, const double coef);
     void set_coef_2D(const int i, const int j, const double coef);
-    CMatrix transpose();
+    CMatrix transpose() const;
     CMatrix sum(const CMatrix& mat) const;
     CMatrix sub(const CMatrix& mat) const;
     CMatrix homo(const double lambda) const;
