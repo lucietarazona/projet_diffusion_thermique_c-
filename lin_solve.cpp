@@ -18,7 +18,7 @@ CMatrix lin_solve(const CMatrix& A, const CMatrix& b, CMatrix& x0, const double&
             double den = pk.transpose().mult(A.mult(pk)).max_coef();
             double num = rk.transpose().mult(rk).max_coef();
             double ak = num / den;
-            CMatrix xk = pk.homo(ak);
+            CMatrix xk1 = xk.sum(pk.homo(ak));
             CMatrix rk1 = rk.sub(A.mult(pk).homo(ak));
             //if (rk1.max_coef()>epsilon)
             double num2 = rk1.transpose().mult(rk1).max_coef();
@@ -37,7 +37,7 @@ CMatrix lin_solve(const CMatrix& A, const CMatrix& b, CMatrix& x0, const double&
             
             for (int i=0;i<nb_lin;i++)
             {
-                results.push_back(xk.get_coef_1D(i));
+                results.push_back(xk1.get_coef_1D(i));
             }
             //std::cout<<rk1.max_coef()<<std::endl;
 

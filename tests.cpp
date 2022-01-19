@@ -89,12 +89,12 @@ void tests()
 
     //linear system solving test
     std::cout<<"linear system solving test"<<std::endl;
-    std::vector<double> coefs_L({1,0,0,0,1,0,0,0,1});
-    std::vector<double> coefs_M({2,3,4});
-    CMatrix L(3,3,coefs_L);
-    CMatrix M(3,1,coefs_M);
-    CMatrix init (3,1, {0,0,0});
-    CMatrix res = lin_solve(L, M, init, 0.1);
+    std::vector<double> coefs_L({2,1,1,3});
+    std::vector<double> coefs_M({4,9});
+    CMatrix L(2,2,coefs_L);
+    CMatrix M(2,1,coefs_M);
+    CMatrix init (2,1, {0,0});
+    CMatrix res = lin_solve(L, M, init, 0.01);
     res.display();
 
 
