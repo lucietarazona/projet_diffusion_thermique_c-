@@ -6,6 +6,7 @@
 
 void tests()
 {
+    {
     //position test
     std::cout<<"position test"<<std::endl;
     std::vector<double> coefs_T({4,8,6,2,3,9});
@@ -32,7 +33,9 @@ void tests()
     std::cout<<"transpose test"<<std::endl;
     CMatrix mat_res=T.transpose();
     mat_res.display();
+    }
     
+    {
     //addition test
     std::cout<<"addition test"<<std::endl;
     std::vector<double> coefs_A({1,2,3,4});
@@ -46,7 +49,9 @@ void tests()
     B.display();
     std::cout<<"result"<<std::endl;
     C.display();
+    }
 
+    {
     //substraction test
     std::cout<<"substraction test"<<std::endl;
     std::vector<double> coefs_D({1,2,3,4});
@@ -60,7 +65,9 @@ void tests()
     E.display();
     std::cout<<"result"<<std::endl;
     F.display();
+    }
 
+    {
     //scalar multiplication test
     std::cout<<"scalar multiplication test"<<std::endl;
     std::vector<double> coefs_G({2.5,3,4.1,2});
@@ -69,10 +76,12 @@ void tests()
     CMatrix H=G.homo(a);
     std::cout<<"matrix"<<std::endl;
     G.display();
-    std::cout<<"sclar = "<<a<<std::endl;
+    std::cout<<"scalar = "<<a<<std::endl;
     std::cout<<"result"<<std::endl;
     H.display();
+    }
 
+    {
     //matrix multiplication test
     std::cout<<"matrix multiplication test"<<std::endl;
     std::vector<double> coefs_I({1,5,0,2,3,2});
@@ -86,16 +95,19 @@ void tests()
     J.display();
     std::cout<<"result"<<std::endl;
     K.display();
+    }
 
+    {
     //linear system solving test
     std::cout<<"linear system solving test"<<std::endl;
-    std::vector<double> coefs_L({2,1,1,3});
-    std::vector<double> coefs_M({4,9});
+    std::vector<double> coefs_L({2,0,0,2});
+    std::vector<double> coefs_M({4,8});
     CMatrix L(2,2,coefs_L);
     CMatrix M(2,1,coefs_M);
     CMatrix init (2,1, {0,0});
     CMatrix res = lin_solve(L, M, init, 0.01);
     res.display();
+    }
 
 
 }

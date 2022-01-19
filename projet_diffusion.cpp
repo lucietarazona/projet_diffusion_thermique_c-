@@ -16,10 +16,10 @@ int main (int argc, char** argv)
     }
     else
     {
-   double tf {1};
+   double tf {0.5};
    double xf {1};
    int Nx {10};
-   int Nt {100};
+   int Nt {1000};
    double delta_t = tf/Nt;
    double delta_x = xf/Nx;
    
