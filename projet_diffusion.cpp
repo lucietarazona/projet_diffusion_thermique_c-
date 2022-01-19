@@ -18,26 +18,27 @@ int main (int argc, char** argv)
     {
    double tf {0.5};
    double xf {1};
-   int Nx {10};
+   int Nx {20};
    int Nt {1000};
    double delta_t = tf/Nt;
    double delta_x = xf/Nx;
    
-   CMatrix K(Nx,Nx,std::vector<double>(Nx*Nx,0));
+   CMatrix K0(Nx,Nx,std::vector<double>(Nx*Nx,0));
    for (int i=0;i<Nx;i++)
    {
        for(int j=0;j<Nx;j++)
        {
            if (i==j)
            {
-               K.set_coef_2D(i,i,-2);
+               K0.set_coef_2D(i,i,-2);
            }
            else if ((i==j-1)||(j==i-1))
            {
-               K.set_coef_2D(i,j,1);
+               K0.set_coef_2D(i,j,1);
            }
        }
    }
+   CMatrix K = K0.homo(1/(delta_x * delta_x));
    //K.display(); to check K
 
 
@@ -76,7 +77,7 @@ int main (int argc, char** argv)
     //temp.display(); up to you
 
     //exporting to txt
-    std::ofstream values_exp_file ("values_temp.txt");
+    std::ofstream values_exp_file ("values_temperature.txt");
     for (int i=0;i<Nt;i++)
     {
         for (int j=0;j<Nx;j++)
