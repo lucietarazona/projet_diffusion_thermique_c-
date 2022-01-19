@@ -2,12 +2,13 @@
 #include <vector>
 
 #include "includes/CMatrix.h"
+#include "includes/lin_solve.h"
 
 void tests()
 {
     //position test
     std::cout<<"position test"<<std::endl;
-    std::vector<double> coefs_T({4,8,6,2,3,5});
+    std::vector<double> coefs_T({4,8,6,2,3,9});
     CMatrix T(2,3,coefs_T);
     std::cout<<"T="<<std::endl;
     T.display();
@@ -24,6 +25,7 @@ void tests()
     //set test
     std::cout<<"set 2D test"<<std::endl;
     T.set_coef_2D(1,2,25);
+    std::cout<<"coef (1,2) becomes 25"<<std::endl;
     T.display();
 
     //transpose test
@@ -38,8 +40,11 @@ void tests()
     CMatrix A(2,2,coefs_A);
     CMatrix B(2,2,coefs_B);
     CMatrix C=A.sum(B);
+    std::cout<<"matrix 1"<<std::endl;
     A.display();
+    std::cout<<"matrix 2"<<std::endl;
     B.display();
+    std::cout<<"result"<<std::endl;
     C.display();
 
     //substraction test
@@ -49,8 +54,11 @@ void tests()
     CMatrix D(2,2,coefs_D);
     CMatrix E(2,2,coefs_E);
     CMatrix F=D.sub(E);
+    std::cout<<"matrix 1"<<std::endl;
     D.display();
+    std::cout<<"matrix 2"<<std::endl;
     E.display();
+    std::cout<<"result"<<std::endl;
     F.display();
 
     //scalar multiplication test
@@ -59,7 +67,10 @@ void tests()
     CMatrix G(2,2,coefs_G);
     double a {3.5};
     CMatrix H=G.homo(a);
+    std::cout<<"matrix"<<std::endl;
     G.display();
+    std::cout<<"sclar = "<<a<<std::endl;
+    std::cout<<"result"<<std::endl;
     H.display();
 
     //matrix multiplication test
@@ -69,8 +80,23 @@ void tests()
     CMatrix I(2,3,coefs_I);
     CMatrix J(3,1,coefs_J);
     CMatrix K=I.mult(J);
+    std::cout<<"matrix 1"<<std::endl;
     I.display();
+    std::cout<<"matrix 2"<<std::endl;
     J.display();
+    std::cout<<"result"<<std::endl;
     K.display();
+
+    //linear system solving test
+    std::cout<<"linear system solving test"<<std::endl;
+    std::vector<double> coefs_L({1,0,0,0,1,0,0,0,1});
+    std::vector<double> coefs_M({2,3,4});
+    CMatrix L(3,3,coefs_L);
+    CMatrix M(3,1,coefs_M);
+    CMatrix init (3,1, {0,0,0});
+    CMatrix res = lin_solve(L, M, init, 0.1);
+    res.display();
+
+
 }
 

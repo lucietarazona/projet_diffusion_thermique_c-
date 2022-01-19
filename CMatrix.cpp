@@ -114,14 +114,28 @@ void CMatrix::display() const
             std::cout<<std::endl;
         }
     }
+
 double CMatrix::max_coef()const
 {
-    double max=_coefs[0];
+    double max {0};
+    if (_coefs[0]>=0)
+    {
+        max = _coefs[0];
+    }
+    else
+    {
+        max = -_coefs[0];
+    }
+    
     for (int i=0;i<_height*_width;i++)
     {
-        if (_coefs[i]>max)
+        if (_coefs[i]>=0 && _coefs[i]>max)
         {
-            max=_coefs[i];
+            max = _coefs[i];
+        }
+        else if (_coefs[i]<0 && -_coefs[i]>max)
+        {
+            max = -_coefs[i];
         }
     }
     return max;

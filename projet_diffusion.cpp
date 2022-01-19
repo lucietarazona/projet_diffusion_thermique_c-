@@ -19,7 +19,7 @@ int main (int argc, char** argv)
    double tf {1};
    double xf {1};
    int Nx {10};
-   int Nt {10};
+   int Nt {100};
    double delta_t = tf/Nt;
    double delta_x = xf/Nx;
    
@@ -66,6 +66,10 @@ int main (int argc, char** argv)
        for (int j=0;j<Nx;j++)
        {
            temp.set_coef_2D(i,j,T1.get_coef_1D(j));
+       }
+       for (int i=0;i<Nx;i++)
+       {
+           T.set_coef_1D(i, T1.get_coef_1D(i));
        }
 
    }
