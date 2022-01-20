@@ -1,0 +1,3 @@
+Le code python pour visualiser les évolutions de température est sous la forme d'un notebook.
+Bien veiller à ce que le fichier txt soit dans le même dossier que le notebook.
+Les fichiers valeurs6.txt et valeursimp2.txt (valeurs obtenues avec euler explicite et implicite respectivement) servent d'exemples pour le notebook, il suffit de changer le nom du fichier texte à lire pour obtenir d'autres évolutions.

@@ -109,6 +109,7 @@ void tests()
     L.display();
     M.display();
     res.display();
+    std::cout<<"expected result (2 4)"<<std::endl;
     }
     {
     std::cout<<"linear system solving test non diag matrix"<<std::endl;
@@ -121,18 +122,7 @@ void tests()
     L.display();
     M.display();
     res.display();
-    }
-    {
-    std::cout<<"c'est la détresse"<<std::endl;
-    std::vector<double> coefs_L({2,0,0,2});
-    std::vector<double> coefs_M({4,8});
-    CMatrix L(2,2,coefs_L);
-    CMatrix M(2,1,coefs_M);
-    CMatrix res1 = M.sub(L.mult(M));
-    res1.display();
-    CMatrix modif1 = L.mult(M);
-    CMatrix res2 = M.sub(modif1);
-    res2.display();
+    std::cout<<"expected result (0.6 2.8)"<<std::endl;
     }
 
     {

@@ -23,7 +23,8 @@ int main (int argc, char** argv)
    int Nt {500};
    double delta_t = tf/Nt;
    double delta_x = xf/Nx;
-   
+
+   //initializing K
    CMatrix K0(Nx,Nx,std::vector<double>(Nx*Nx,0));
    for (int i=0;i<Nx;i++)
    {
@@ -45,10 +46,11 @@ int main (int argc, char** argv)
 
     
     //euler explicit
+
     //matrix keeping all temperature values
     CMatrix temp_exp(Nt,Nx,std::vector<double>(Nt*Nx,0));
 
-    //temperature initialization and values in temp
+    //temperature initialization and values in temp_exp
     CMatrix T(Nx,1,std::vector<double>(Nx*1,0));
     for (int i=0; i<Nx-1; i++)
     {
@@ -94,10 +96,11 @@ int main (int argc, char** argv)
 
     
     //euler implicit
+
     //matrix keeping all temperature values
     CMatrix temp_imp(Nt,Nx,std::vector<double>(Nt*Nx,0));
 
-    //temperature initialization and values in temp
+    //temperature initialization and values in temp_imp
     CMatrix Ti(Nx,1,std::vector<double>(Nx*1,0));
     for (int i=0; i<Nx-1; i++)
     {
