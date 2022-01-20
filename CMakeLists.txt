@@ -11,12 +11,12 @@ include_directories("./includes")
 FILE(GLOB mainSources *.cpp)
 FILE(GLOB cppSources cpp/*.cpp)
 
-add_executable (matt
+add_executable (projet_diffusion
         ${mainSources}
         ${cppSources}
 )
 
-target_include_directories(matt PUBLIC
+target_include_directories(projet_diffusion PUBLIC
         "${PROJECT_SOURCE_DIR}/includes")
         
 

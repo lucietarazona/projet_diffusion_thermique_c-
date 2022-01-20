@@ -10,7 +10,16 @@ CMatrix::~CMatrix() {}
 
 int CMatrix::position(const int i, const int j) const //be careful, i and j start from 0!
 {
-    return _width*i +j; 
+    if (_width*i+j < _width*_height)
+    {
+        return _width*i +j;
+    }
+    else
+    {
+        std::cout<<"position out of range"<<std::endl;
+        return 0;
+    }
+     
 }
 
 std::vector<int> CMatrix::dimensions() const
@@ -20,23 +29,57 @@ std::vector<int> CMatrix::dimensions() const
 
 double CMatrix::get_coef_1D(const int i) const
 {
-    return _coefs[i];
+    if (i<_width*_height)
+    {
+        return _coefs[i];
+    }
+    else
+    {
+        std::cout<<"get_coef_1D out of range"<<std::endl;
+        return 1.0;
+    }
+    
 }
 double CMatrix::get_coef_2D(const int i, const int j) const//be careful, i and j start from 0!
 {
-    int p = position(i,j);
-    return _coefs[p];
+    if (i<_height && j<_width)
+    {
+        int p = position(i,j);
+        return _coefs[p];
+    }
+    else
+    {
+        std::cout<<"get_coef_2D out of range"<<std::endl;
+        return 2.0;
+    }
+    
 }
 
 void CMatrix::set_coef_1D(const int i, const double coef)
 {
-    _coefs[i] = coef;
+    if (i<_width*_height)
+    {
+        _coefs[i] = coef;
+    }
+    else
+    {
+        std::cout<<"set_coef_1D out of range"<<std::endl;
+    }
+    
 }
 
 void CMatrix::set_coef_2D(const int i, const int j, const double coef)//be careful, i and j start from 0!
 {
-    int p = position(i,j);
-    _coefs[p] = coef;
+    if (i<_height && j<_width)
+    {
+        int p = position(i,j);
+        _coefs[p] = coef;
+    }
+    else
+    {
+        std::cout<<"set_coef_2D out of range"<<std::endl;
+    }
+    
 }
 
 CMatrix CMatrix::transpose() const
@@ -58,6 +101,8 @@ CMatrix CMatrix::transpose() const
 //maths
 CMatrix CMatrix::sum(const CMatrix& mat) const
     {
+        if (_height == mat._height && _width == mat._width)
+        {
         // on crée une matrice de taille _height*_width, et ses coefficients sont un vecteur de 0 de taille _height*_width
         CMatrix mat_res(_height, _width, std::vector<double>(_height * _width, 0)); 
         for (int i=0;i<_height*_width;i++)
@@ -65,16 +110,32 @@ CMatrix CMatrix::sum(const CMatrix& mat) const
                 mat_res._coefs[i]=_coefs[i]+mat._coefs[i];
             }
         return mat_res;
+        }
+        else
+        {
+            std::cout<<"sum error : different dimensions matrices"<<std::endl;
+            return mat;
+        }
+        
     }
 
 CMatrix CMatrix::sub(const CMatrix& mat) const 
 {
-    CMatrix mat_res(_height,_width, std::vector<double>(_height*_width,0));
+    if (_height == mat._height && _width == mat._width)
+    {
+     CMatrix mat_res(_height,_width, std::vector<double>(_height*_width,0));
     for (int i=0;i<_height*_width;i++)
     {
         mat_res._coefs[i]=_coefs[i]-mat._coefs[i];
     }
     return mat_res;
+    }
+    else 
+    {
+        std::cout<<"sub error : different dimensions matrices"<<std::endl;
+        return mat;
+    }
+
 }
 
 CMatrix CMatrix::homo(const double lambda) const
@@ -89,6 +150,8 @@ CMatrix CMatrix::homo(const double lambda) const
 
 CMatrix CMatrix::mult(const CMatrix& mat) const
     {
+        if (_width == mat._height)
+        {
         CMatrix mat_res(_height,mat._width,std::vector<double>(_height*mat._width,0));
         for (int i=0;i<_height;i++)
         {
@@ -101,6 +164,13 @@ CMatrix CMatrix::mult(const CMatrix& mat) const
             }
         }
         return mat_res;
+        }
+        else
+        {
+            std::cout<<"mult error : not compatible matrices"<<std::endl;
+            return mat;
+        }
+
     }
 
 void CMatrix::display() const
