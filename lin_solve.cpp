@@ -8,9 +8,17 @@ CMatrix lin_solve(const CMatrix& A, const CMatrix& b, const CMatrix& x0, const d
 {
     CMatrix rk = b.sub(A.mult(x0));
     int nb_lin = rk.dimensions()[0];
-    CMatrix pk = rk;
-    CMatrix xk = x0;
-    CMatrix results (x0.dimensions()[0],1,std::vector<double>(x0.dimensions()[0],0));
+    CMatrix pk (nb_lin,1,std::vector<double>(nb_lin,0));
+    for (int i=0; i<nb_lin; i++)
+    {
+        pk.set_coef_1D(i,rk.get_coef_1D(i));
+    }
+    CMatrix xk (nb_lin,1,std::vector<double>(nb_lin,0));
+    for (int i=0; i<nb_lin; i++)
+    {
+        xk.set_coef_1D(i,x0.get_coef_1D(i));
+    }
+    CMatrix results (nb_lin,1,std::vector<double>(nb_lin,0));
     while (rk.max_coef()>epsilon)
         {
             CMatrix C = A.mult(pk);
@@ -49,6 +57,11 @@ CMatrix lin_solve(const CMatrix& A, const CMatrix& b, const CMatrix& x0, const d
             {
                 pk.set_coef_1D(i, pk1.get_coef_1D(i));
             }
+            for (int i=0;i<nb_lin;i++) //xk:=xk1
+            {
+                xk.set_coef_1D(i, xk1.get_coef_1D(i));
+            }
+            
 
         }
         return results;

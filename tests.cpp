@@ -111,13 +111,13 @@ void tests()
     res.display();
     }
     {
-    std::cout<<"linear system solving test diag matrix"<<std::endl;
-    std::vector<double> coefs_L({2,1,1,2});
+    std::cout<<"linear system solving test non diag matrix"<<std::endl;
+    std::vector<double> coefs_L({2,1,1,3});
     std::vector<double> coefs_M({4,9});
     CMatrix L(2,2,coefs_L);
     CMatrix M(2,1,coefs_M);
     CMatrix init (2,1, {0,0});
-    CMatrix res = lin_solve(L, M, init, 0.01);
+    CMatrix res = lin_solve(L, M, init, 0.001);
     L.display();
     M.display();
     res.display();

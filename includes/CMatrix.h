@@ -20,7 +20,8 @@ public:
     CMatrix mult(const CMatrix& mat) const;
     void display() const;
     double max_coef()const;
-
+    CMatrix &operator=(const CMatrix &m) = default;
+    
 private: 
    const int _height;
    const int _width;
